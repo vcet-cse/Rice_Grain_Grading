@@ -1,13 +1,23 @@
 import * as React from 'react';
-import { Button, View, Text } from 'react-native';
+import { View, 
+    Text, 
+    Image,
+    ImageBackground,
+    StyleSheet,
+} from 'react-native';
+import * as Animatable from 'react-native-animatable';
+import { ScrollView } from 'react-native-gesture-handler';
 
+const HomeScreen = () => {
 
-function HomeScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Hello World</Text>
-    </View>
-  );
+    return (
+        <View>
+          <Text>Hello Home Page</Text>
+        </View>
+    );
 }
 
-export default HomeScreen;
+const styles = StyleSheet.create({
+  });
+
+export default HomeScreen

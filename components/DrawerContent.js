@@ -55,14 +55,14 @@ const Drawercontent = (props) => {
                                     <FontAwesomeIcon icon={faUserCog} size={20} color={"black"} />
                                 )}
                                 label="How to use"
-                                //onPress={() => {props.navigation.navigate('Favorits')}}
+                                onPress={() => {props.navigation.navigate('Howtouse')}}
                             />
                             <DrawerItem 
                                 icon={() => (
                                     <FontAwesomeIcon icon={faUserFriends} size={20} color={"black"} />
                                 )}
                                 label="About us"
-                                //onPress={() => {props.navigation.navigate('Products')}}
+                                onPress={() => {props.navigation.navigate('Aboutus')}}
                             />
                         </Drawer.Section>
                     </View>

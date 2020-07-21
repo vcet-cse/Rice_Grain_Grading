@@ -5,10 +5,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 import HomeScreen from './HomeComponent';
+import HowTouse from './HowtoUseComponent';
+import AboutUs from './AboutUsComponent';
 import Drawercontent from './DrawerContent';
-import { createAppContainer, SafeAreaView } from 'react-navigation';
 
 const HomeStack = createStackNavigator();
+const HowToUseStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const HomeStackScreen = ({ navigation }) => (
@@ -41,11 +43,73 @@ const HomeStackScreen = ({ navigation }) => (
     </HomeStack.Navigator>
 );
 
+const HowToUseStackScreen = ({ navigation }) => (
+  <HowToUseStack.Navigator 
+    screenOptions = {{
+      headerStyle: {
+        backgroundColor: '#512DA8'
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold'
+      }
+    }}
+  >
+    <HowToUseStack.Screen
+        name="How to use"
+        component={HowTouse}
+        options = {{
+          headerLeft: () => (
+            <Icon 
+              reverse
+              name='menu' 
+              size={25} 
+              color='#512DA8'
+              onPress= {() => {navigation.openDrawer()}}
+            />
+          )
+        }}
+    />
+  </HowToUseStack.Navigator>
+);
+
+const AboutUsStackScreen = ({ navigation }) => (
+  <HowToUseStack.Navigator 
+    screenOptions = {{
+      headerStyle: {
+        backgroundColor: '#512DA8'
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold'
+      }
+    }}
+  >
+    <HowToUseStack.Screen
+        name="About us"
+        component={AboutUs}
+        options = {{
+          headerLeft: () => (
+            <Icon 
+              reverse
+              name='menu' 
+              size={25} 
+              color='#512DA8'
+              onPress= {() => {navigation.openDrawer()}}
+            />
+          )
+        }}
+    />
+  </HowToUseStack.Navigator>
+);
+
 const MainNavigator = () => {
   return (
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="Home" drawerContent={props => <Drawercontent {...props}/>} >
         <Drawer.Screen name="Home" component={HomeStackScreen} />
+        <Drawer.Screen name="Howtouse" component={HowToUseStackScreen} />
+        <Drawer.Screen name="Aboutus" component={AboutUsStackScreen} />
       </Drawer.Navigator>
    </NavigationContainer>
   );
