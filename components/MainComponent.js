@@ -17,7 +17,7 @@ const HomeStackScreen = ({ navigation }) => (
     <HomeStack.Navigator 
       screenOptions = {{
         headerStyle: {
-          backgroundColor: '#512DA8'
+          backgroundColor: '#00313f'
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -34,7 +34,7 @@ const HomeStackScreen = ({ navigation }) => (
                 reverse
                 name='menu' 
                 size={25} 
-                color='#512DA8'
+                color='#00313f'
                 onPress= {() => {navigation.openDrawer()}}
               />
             )
@@ -47,7 +47,7 @@ const HowToUseStackScreen = ({ navigation }) => (
   <HowToUseStack.Navigator 
     screenOptions = {{
       headerStyle: {
-        backgroundColor: '#512DA8'
+        backgroundColor: '#00313f'
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
@@ -64,7 +64,7 @@ const HowToUseStackScreen = ({ navigation }) => (
               reverse
               name='menu' 
               size={25} 
-              color='#512DA8'
+              color='#00313f'
               onPress= {() => {navigation.openDrawer()}}
             />
           )
@@ -77,7 +77,7 @@ const AboutUsStackScreen = ({ navigation }) => (
   <HowToUseStack.Navigator 
     screenOptions = {{
       headerStyle: {
-        backgroundColor: '#512DA8'
+        backgroundColor: '#00313f'
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
@@ -94,7 +94,7 @@ const AboutUsStackScreen = ({ navigation }) => (
               reverse
               name='menu' 
               size={25} 
-              color='#512DA8'
+              color='#00313f'
               onPress= {() => {navigation.openDrawer()}}
             />
           )

@@ -1,12 +1,10 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ImageBackground } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faUser, faLock, faAddressCard, faHome, faList, faHeart, faCartArrowDown, faCartPlus, faShoppingBag, faSignOutAlt, faSign, faSignInAlt, faStar, faUserAstronaut, faUserFriends, faUserCircle, faUserAltSlash, faUserCog, faLevelDownAlt, } from '@fortawesome/free-solid-svg-icons';
 import {
     Avatar,
     Drawer,
-    Title,
-    Caption,
     Text
 } from 'react-native-paper';
 import {
@@ -17,51 +15,47 @@ import {
 const Drawercontent = (props) => {
     
     return(
-        <View style={{flex:1}}>
+        <View style={{flex:1, backgroundColor: "#00303d"}}>
             <DrawerContentScrollView {...props}>
                 <View style={styles.drawerContent}>
-                    <View style={styles.userInfoSection}>
-                        <View style={{flexDirection:'row',marginTop: 15, }}>
-                            <Avatar.Image 
-                                source={{
-                                    uri: 'https://api.adorable.io/avatars/50/abott@adorable.png'
-                                }}
-                                size={50}
-                            />
-                            <View style={{marginLeft:15, flexDirection:'column'}}>
-
-                                <Text>Hello World</Text>
-
-                            </View>
-                        </View>
-
+                    <View>
+                        <ImageBackground
+                            resizeMode={'cover'} 
+                            style={{width: 280, height: 150}}
+                            source={require('../assets/header_wallpaper.jpg')}
+                        >
+                        </ImageBackground>
                         <Drawer.Section style={styles.drawerSection}>
                             <DrawerItem 
                                 icon={() => (
-                                    <FontAwesomeIcon icon={faHome} size={20} color={"black"} />
+                                    <FontAwesomeIcon icon={faHome} size={20} color={"white"} />
                                 )}
                                 label="Home"
+                                labelStyle={{color:"#fff"}}
                                 onPress={() => {props.navigation.navigate('Home')}}
                             />
                             <DrawerItem 
                                 icon={() => (
-                                    <FontAwesomeIcon icon={faStar} size={20} color={"black"} />
+                                    <FontAwesomeIcon icon={faStar} size={20} color={"white"} />
                                 )}
                                 label="Grade Your Rice"
+                                labelStyle={{color:"#fff"}}
                                 //onPress={() => {props.navigation.navigate('Products')}}
                             />
                             <DrawerItem 
                                 icon={() => (
-                                    <FontAwesomeIcon icon={faUserCog} size={20} color={"black"} />
+                                    <FontAwesomeIcon icon={faUserCog} size={20} color={"white"} />
                                 )}
                                 label="How to use"
+                                labelStyle={{color:"#fff"}}
                                 onPress={() => {props.navigation.navigate('Howtouse')}}
                             />
                             <DrawerItem 
                                 icon={() => (
-                                    <FontAwesomeIcon icon={faUserFriends} size={20} color={"black"} />
+                                    <FontAwesomeIcon icon={faUserFriends} size={20} color={"white"} />
                                 )}
                                 label="About us"
+                                labelStyle={{color:"#fff"}}
                                 onPress={() => {props.navigation.navigate('Aboutus')}}
                             />
                         </Drawer.Section>
@@ -73,9 +67,10 @@ const Drawercontent = (props) => {
             <Drawer.Section style={styles.bottomDrawerSection}>
                 <DrawerItem 
                     icon={() => (
-                        <FontAwesomeIcon icon={faLevelDownAlt} size={20} color={"black"} />
+                        <FontAwesomeIcon icon={faSignOutAlt} size={20} color={"white"} />
                     )}
                     label="Exit"
+                    labelStyle={{color:"#fff"}}
                     //onPress={() => {props.logoutUser()}}
                 />
             </Drawer.Section>
@@ -123,7 +118,7 @@ const styles = StyleSheet.create({
     },
     bottomDrawerSection: {
         marginBottom: 15,
-        borderTopColor: '#f4f4f4',
+        borderTopColor: '#000',
         borderTopWidth: 1
     },
     preference: {
