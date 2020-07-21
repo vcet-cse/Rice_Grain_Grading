@@ -7,10 +7,13 @@ import { Icon } from 'react-native-elements';
 import HomeScreen from './HomeComponent';
 import HowTouse from './HowtoUseComponent';
 import AboutUs from './AboutUsComponent';
+import ImageUpload from './ImageUploadComponent';
 import Drawercontent from './DrawerContent';
 
 const HomeStack = createStackNavigator();
 const HowToUseStack = createStackNavigator();
+const ImageUploadStack = createStackNavigator();
+const AboutusStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const HomeStackScreen = ({ navigation }) => (
@@ -74,7 +77,7 @@ const HowToUseStackScreen = ({ navigation }) => (
 );
 
 const AboutUsStackScreen = ({ navigation }) => (
-  <HowToUseStack.Navigator 
+  <AboutusStack.Navigator 
     screenOptions = {{
       headerStyle: {
         backgroundColor: '#00313f'
@@ -85,7 +88,7 @@ const AboutUsStackScreen = ({ navigation }) => (
       }
     }}
   >
-    <HowToUseStack.Screen
+    <AboutusStack.Screen
         name="About us"
         component={AboutUs}
         options = {{
@@ -100,7 +103,37 @@ const AboutUsStackScreen = ({ navigation }) => (
           )
         }}
     />
-  </HowToUseStack.Navigator>
+  </AboutusStack.Navigator>
+);
+
+const ImageUploadStackScreen = ({ navigation }) => (
+  <ImageUploadStack.Navigator 
+    screenOptions = {{
+      headerStyle: {
+        backgroundColor: '#00313f'
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold'
+      }
+    }}
+  >
+    <ImageUploadStack.Screen
+        name="Rice Grain Grading"
+        component={ImageUpload}
+        options = {{
+          headerLeft: () => (
+            <Icon 
+              reverse
+              name='menu' 
+              size={25} 
+              color='#00313f'
+              onPress= {() => {navigation.openDrawer()}}
+            />
+          )
+        }}
+    />
+  </ImageUploadStack.Navigator>
 );
 
 const MainNavigator = () => {
@@ -110,6 +143,7 @@ const MainNavigator = () => {
         <Drawer.Screen name="Home" component={HomeStackScreen} />
         <Drawer.Screen name="Howtouse" component={HowToUseStackScreen} />
         <Drawer.Screen name="Aboutus" component={AboutUsStackScreen} />
+        <Drawer.Screen name="ImageUpload" component={ImageUploadStackScreen} />
       </Drawer.Navigator>
    </NavigationContainer>
   );

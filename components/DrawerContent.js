@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, ImageBackground } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faUser, faLock, faAddressCard, faHome, faList, faHeart, faCartArrowDown, faCartPlus, faShoppingBag, faSignOutAlt, faSign, faSignInAlt, faStar, faUserAstronaut, faUserFriends, faUserCircle, faUserAltSlash, faUserCog, faLevelDownAlt, } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSignOutAlt, faStar, faUserFriends, faUserCog } from '@fortawesome/free-solid-svg-icons';
 import {
     Avatar,
     Drawer,
@@ -40,7 +40,7 @@ const Drawercontent = (props) => {
                                 )}
                                 label="Grade Your Rice"
                                 labelStyle={{color:"#fff"}}
-                                //onPress={() => {props.navigation.navigate('Products')}}
+                                onPress={() => {props.navigation.navigate('Howtouse')}}
                             />
                             <DrawerItem 
                                 icon={() => (
@@ -48,7 +48,7 @@ const Drawercontent = (props) => {
                                 )}
                                 label="How to use"
                                 labelStyle={{color:"#fff"}}
-                                onPress={() => {props.navigation.navigate('Howtouse')}}
+                                onPress={() => {props.navigation.navigate('ImageUpload')}}
                             />
                             <DrawerItem 
                                 icon={() => (

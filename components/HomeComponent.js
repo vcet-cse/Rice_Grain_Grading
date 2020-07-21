@@ -7,7 +7,7 @@ import { View,
 import * as Animatable from 'react-native-animatable';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
 
     return (
         <View style={styles.container}>
@@ -31,8 +31,8 @@ const HomeScreen = () => {
                 The quality analysis of the grain type is done and graded the grain type as Premium grade 1, grade2 and grade 3 depending  on features.
               </Text>
               <TouchableOpacity
-                style={[styles.buttonLargeContainer, styles.primaryButton]}
-                onPress={() => {}}
+                style={styles.primaryButton}
+                onPress={() => {navigation.navigate('ImageUpload')}}
               >
                 <Text style={styles.buttonText}>START GRADING</Text>
               </TouchableOpacity>
@@ -87,17 +87,14 @@ const styles = StyleSheet.create({
     button: {
       color: '#000'
     },
-    buttonLargeContainer: {
+    primaryButton: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
       width: 320,
       height: 45,
       marginTop: 15,
-      borderRadius: 20
-      
-    },
-    primaryButton: {
+      borderRadius: 20,
       backgroundColor: '#ba831e',
     },
     buttonText: {
