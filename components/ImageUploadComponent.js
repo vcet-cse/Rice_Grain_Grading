@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { View, 
     Text, 
     Image,
@@ -9,26 +9,49 @@ import * as Animatable from 'react-native-animatable';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faFileImage } from '@fortawesome/free-solid-svg-icons';
 import {Picker} from '@react-native-community/picker';
+import * as ImagePicker from 'expo-image-picker';
 
 const ImageUpload = () => {
+
+    const [riceImage, setRiceImage] = useState('');
+    const [riceType, setRiceType] = useState('Please select Rice Type');
+    
+    const _getPhotoLibrary = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+         allowsEditing: true
+        });
+        if (!result.cancelled) {
+            setRiceImage(result.uri);
+            alert(typeof(result.uri));
+        }
+    }
 
     return (
         <View style={styles.container}>
             <Animatable.View 
                 animation="fadeInUpBig"
             >
-                <View onTouchStart={() => alert("Touched me")} style={styles.ImageSelect}>
-                    <FontAwesomeIcon icon={faFileImage} size={150} color={"black"} style={styles.Image_icon}/>
-                    <Text style={styles.upload_text}>Click Here to Select Image</Text>
-                </View>
-
+                {
+                    riceImage===''?
+                    <View onTouchStart={() => _getPhotoLibrary()} style={styles.ImageSelect}>
+                        <FontAwesomeIcon icon={faFileImage} size={150} color={"black"} style={styles.Image_icon}/>
+                        <Text style={styles.upload_text}>Click Here to Select Image</Text>
+                    </View>
+                    :
+                    <Image 
+                        source={{ uri: riceImage }} 
+                        style={{ aspectRatio: 1, resizeMode: 'contain', }} 
+                        onTouchStart={() => _getPhotoLibrary()}
+                    />  
+                }
+            
                 <View
                     style={styles.primaryButton}
                 >
                     <Picker
-                        //selectedValue={this.state.language}
+                        selectedValue={riceType}
                         style={[{height: 50, width: 150}, styles.buttonText]}
-                        //onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}
+                        onValueChange={(itemValue, itemIndex) => setRiceType(itemValue)}
                     >
                         <Picker.Item label="Java" value="java" />
                         <Picker.Item label="JavaScript" value="js" />
@@ -55,8 +78,8 @@ const styles = StyleSheet.create({
     ImageSelect: {
         backgroundColor: "#fff", 
         height: 340, 
-        borderColor: "#ba831e", 
-        borderWidth: 10,
+        borderColor: "#000", 
+        borderWidth: 2,
         marginBottom: 20
     },
     Image_icon: {
