@@ -1,16 +1,15 @@
 import React from 'react';
-import { View, StyleSheet, ImageBackground } from 'react-native';
+import { View, StyleSheet, ImageBackground, BackHandler } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHome, faSignOutAlt, faStar, faUserFriends, faUserCog } from '@fortawesome/free-solid-svg-icons';
 import {
-    Avatar,
-    Drawer,
-    Text
+    Drawer
 } from 'react-native-paper';
 import {
     DrawerContentScrollView,
     DrawerItem
 } from '@react-navigation/drawer';
+
 
 const Drawercontent = (props) => {
     
@@ -40,7 +39,7 @@ const Drawercontent = (props) => {
                                 )}
                                 label="Grade Your Rice"
                                 labelStyle={styles.lable_style}
-                                onPress={() => {props.navigation.navigate('Howtouse')}}
+                                onPress={() => {props.navigation.navigate('ImageUpload')}}
                             />
                             <DrawerItem 
                                 icon={() => (
@@ -48,7 +47,7 @@ const Drawercontent = (props) => {
                                 )}
                                 label="How to use"
                                 labelStyle={styles.lable_style}
-                                onPress={() => {props.navigation.navigate('ImageUpload')}}
+                                onPress={() => {props.navigation.navigate('Howtouse')}}
                             />
                             <DrawerItem 
                                 icon={() => (
@@ -71,16 +70,14 @@ const Drawercontent = (props) => {
                     )}
                     label="Exit"
                     labelStyle={styles.lable_style}
-                    //onPress={() => {props.logoutUser()}}
+                    onPress={() => BackHandler.exitApp()}
                 />
             </Drawer.Section>
         </View>
     );
 }
 
-//export default Drawercontent;
 export default Drawercontent;
-
 
 const styles = StyleSheet.create({
     drawerContent: {

@@ -13,8 +13,8 @@ const HowTouse = () => {
     return (
         <View style={styles.container}>
           <ImageBackground
-            resizeMode={'cover'} // or cover
-            style={{flex: 1}} // must be passed from the parent, the number may vary depending upon your screen size
+            resizeMode={'cover'} 
+            style={{flex: 1}}
             source={require('../assets/splash_screen.gif')}
           >
             <View style={styles.header}>

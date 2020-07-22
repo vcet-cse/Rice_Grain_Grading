@@ -10,11 +10,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faFileImage } from '@fortawesome/free-solid-svg-icons';
 import {Picker} from '@react-native-community/picker';
 import * as ImagePicker from 'expo-image-picker';
+import { ScrollView } from 'react-native-gesture-handler';
+import { Loading } from './LoadingComponent';
+import { Modal } from 'react-native-paper';
 
-const ImageUpload = () => {
+const ImageUpload = ( {navigation} ) => {
 
     const [riceImage, setRiceImage] = useState('');
-    const [riceType, setRiceType] = useState('Please select Rice Type');
+    const [riceType, setRiceType] = useState('');
+    const [isLoading, setLoading] = useState(false);
+    const [resultData, setResultData] = useState({'resultsAreset': false});
+
+
+    const displayResult = () => {
+        setResultData({resultsAreset: false})
+        setLoading(false)
+	    navigation.navigate('ResultScreen', {grain_type: resultData['grain_type'], total_grains: resultData['total_grains'], total_damage: resultData['total_damage'], total_correct: resultData['total_correct'], grade: resultData['grade']})
+    }
     
     const _getPhotoLibrary = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -22,49 +34,92 @@ const ImageUpload = () => {
         });
         if (!result.cancelled) {
             setRiceImage(result.uri);
-            alert(typeof(result.uri));
         }
+    }
+    
+    const handleUploadImage = () => {
+        setLoading(true)
+        let body = new FormData();
+        body.append('image', {uri: riceImage, name: riceType, filename :riceType, type: 'image/png'});
+            body.append('Content-Type', 'image/png');
+
+        fetch('http://192.168.225.44:3001/upload',{ method: 'POST',headers:{  
+            "Content-Type": "multipart/form-data",
+            "otherHeader": "foo",
+        },
+         body : body} )
+        .then((res) => res.json())
+        .then((res) => {
+            setResultData({'grain_type': res['Grain_Type'], 'total_grains': res['Total'], 'total_damage': res['Damage'], 'total_correct': res['Correct'], 'grade': res['Result'], 'resultsAreset': true})
+         })
+        .catch((e) => {
+            setLoading(false)
+            alert(e)
+        })
+        .done()    
     }
 
     return (
-        <View style={styles.container}>
-            <Animatable.View 
-                animation="fadeInUpBig"
-            >
-                {
-                    riceImage===''?
-                    <View onTouchStart={() => _getPhotoLibrary()} style={styles.ImageSelect}>
-                        <FontAwesomeIcon icon={faFileImage} size={150} color={"black"} style={styles.Image_icon}/>
-                        <Text style={styles.upload_text}>Click Here to Select Image</Text>
-                    </View>
-                    :
-                    <Image 
-                        source={{ uri: riceImage }} 
-                        style={{ aspectRatio: 1, resizeMode: 'contain', }} 
-                        onTouchStart={() => _getPhotoLibrary()}
-                    />  
-                }
-            
-                <View
-                    style={styles.primaryButton}
+        <ScrollView style={styles.container}>
+                <Animatable.View 
+                    animation="fadeInUpBig"
                 >
-                    <Picker
-                        selectedValue={riceType}
-                        style={[{height: 50, width: 150}, styles.buttonText]}
-                        onValueChange={(itemValue, itemIndex) => setRiceType(itemValue)}
+                    {
+                        riceImage === '' ?
+                        <View onTouchStart={() => _getPhotoLibrary()} style={styles.ImageSelect}>
+                            <FontAwesomeIcon icon={faFileImage} size={150} color={"black"} style={styles.Image_icon}/>
+                            <Text style={styles.upload_text}>Click Here to Select Image</Text>
+                        </View>
+                        :
+                        <Image 
+                            source={{ uri: riceImage }} 
+                            style={{ aspectRatio: 1, resizeMode: 'contain', }} 
+                            onTouchStart={() => _getPhotoLibrary()}
+                        />  
+                    }
+                    <View
+                        style={styles.primaryButton}
                     >
-                        <Picker.Item label="Java" value="java" />
-                        <Picker.Item label="JavaScript" value="js" />
-                    </Picker>
-                </View>
-                <TouchableOpacity
-                    style={styles.primaryButton}
-                    onPress={() => {}}
-                >
-                    <Text style={styles.buttonText}>START GRADING</Text>
-                </TouchableOpacity>
-            </Animatable.View> 
-        </View>
+                        <Picker
+                            selectedValue={riceType}
+                            style={[{height: 50, width: 150}, styles.buttonText]}
+                            onValueChange={(itemValue, itemIndex) => setRiceType(itemValue)}
+                        >
+                            <Picker.Item label="Select Rice Type" value="0" />
+                            <Picker.Item label="Boiled basmathi" value="BOILED_BASMATI" />
+                            <Picker.Item label="2" value="2" />
+                            <Picker.Item label="Boiled [Polished Red]" value="BOILED_POLISHED_RED" />
+                            <Picker.Item label="4" value="4" />
+                            <Picker.Item label="5" value="5" />
+                            <Picker.Item label="6" value="6" />
+                            <Picker.Item label="7" value="7" />
+                            <Picker.Item label="8" value="8" />
+                        </Picker>
+                    </View>
+                    <TouchableOpacity
+                        style={styles.primaryButton}
+                        onPress={() => handleUploadImage()}
+                    >
+                        <Text style={styles.buttonText}>START GRADING</Text>
+                    </TouchableOpacity>
+                </Animatable.View> 
+                {
+                    resultData['resultsAreset'] ?
+                        displayResult()
+                    :
+                        null
+                }
+                {   
+                    isLoading ?
+                    <Modal visible="true">
+                        <View>
+                            <Loading />
+                        </View>
+                    </Modal>
+                    :
+                        null
+                }
+        </ScrollView>
     );
 }
 
@@ -87,7 +142,7 @@ const styles = StyleSheet.create({
         marginStart: 70
     },
     upload_text: {
-        padding: 10,
+        padding: 20,
         fontWeight: "bold",
         fontSize: 23
     },
@@ -98,7 +153,7 @@ const styles = StyleSheet.create({
         width: 320,
         height: 45,
         marginTop: 15,
-        borderRadius: 20
+        borderRadius: 10
     },
     buttonText: {
         color: '#fff',

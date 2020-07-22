@@ -16,7 +16,8 @@ const HomeScreen = ({navigation}) => {
               <Image source={require('../assets/rice_home_page.jpg')} style={styles.header_image}/>
             </View>
             <Animatable.View 
-              animation="fadeInUpBig"
+              animation="slideInDown"
+              direction="alternate"
               style={styles.footer}
             >
               <Text style={styles.text_header}>Rice graing grading system</Text>
@@ -30,6 +31,13 @@ const HomeScreen = ({navigation}) => {
                 The main purpose of grading algorithm is to find out the grade of the rice.
                 The quality analysis of the grain type is done and graded the grain type as Premium grade 1, grade2 and grade 3 depending  on features.
               </Text>
+            </Animatable.View>
+            <Animatable.View 
+              animation="pulse"
+              iterationCount="infinite"
+              direction="alternate"
+              style={styles.footer}
+            >
               <TouchableOpacity
                 style={styles.primaryButton}
                 onPress={() => {navigation.navigate('ImageUpload')}}
@@ -57,7 +65,7 @@ const styles = StyleSheet.create({
         flex: 2,
         backgroundColor: '#00313f',
         paddingHorizontal: 20,
-        paddingVertical: 30
+        paddingVertical: 15
     },
     text_header: {
         color: '#fff',
@@ -83,19 +91,14 @@ const styles = StyleSheet.create({
       height: 200,
       width: 320
     },
-
-    button: {
-      color: '#000'
-    },
     primaryButton: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
       width: 320,
       height: 45,
-      marginTop: 15,
-      borderRadius: 20,
-      backgroundColor: '#ba831e',
+      borderRadius: 10,
+      backgroundColor: '#ba831e'
     },
     buttonText: {
       color: 'white',

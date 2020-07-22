@@ -9,6 +9,7 @@ import HowTouse from './HowtoUseComponent';
 import AboutUs from './AboutUsComponent';
 import ImageUpload from './ImageUploadComponent';
 import Drawercontent from './DrawerContent';
+import ResultScreen from './ResultComponent';
 
 const HomeStack = createStackNavigator();
 const HowToUseStack = createStackNavigator();
@@ -133,6 +134,7 @@ const ImageUploadStackScreen = ({ navigation }) => (
           )
         }}
     />
+    <ImageUploadStack.Screen name="ResultScreen" component={ResultScreen} />
   </ImageUploadStack.Navigator>
 );
 
