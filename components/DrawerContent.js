@@ -31,7 +31,7 @@ const Drawercontent = (props) => {
                                     <FontAwesomeIcon icon={faHome} size={20} color={"white"} />
                                 )}
                                 label="Home"
-                                labelStyle={{color:"#fff"}}
+                                labelStyle={styles.lable_style}
                                 onPress={() => {props.navigation.navigate('Home')}}
                             />
                             <DrawerItem 
@@ -39,7 +39,7 @@ const Drawercontent = (props) => {
                                     <FontAwesomeIcon icon={faStar} size={20} color={"white"} />
                                 )}
                                 label="Grade Your Rice"
-                                labelStyle={{color:"#fff"}}
+                                labelStyle={styles.lable_style}
                                 onPress={() => {props.navigation.navigate('Howtouse')}}
                             />
                             <DrawerItem 
@@ -47,7 +47,7 @@ const Drawercontent = (props) => {
                                     <FontAwesomeIcon icon={faUserCog} size={20} color={"white"} />
                                 )}
                                 label="How to use"
-                                labelStyle={{color:"#fff"}}
+                                labelStyle={styles.lable_style}
                                 onPress={() => {props.navigation.navigate('ImageUpload')}}
                             />
                             <DrawerItem 
@@ -55,7 +55,7 @@ const Drawercontent = (props) => {
                                     <FontAwesomeIcon icon={faUserFriends} size={20} color={"white"} />
                                 )}
                                 label="About us"
-                                labelStyle={{color:"#fff"}}
+                                labelStyle={styles.lable_style}
                                 onPress={() => {props.navigation.navigate('Aboutus')}}
                             />
                         </Drawer.Section>
@@ -70,7 +70,7 @@ const Drawercontent = (props) => {
                         <FontAwesomeIcon icon={faSignOutAlt} size={20} color={"white"} />
                     )}
                     label="Exit"
-                    labelStyle={{color:"#fff"}}
+                    labelStyle={styles.lable_style}
                     //onPress={() => {props.logoutUser()}}
                 />
             </Drawer.Section>
@@ -127,4 +127,9 @@ const styles = StyleSheet.create({
       paddingVertical: 12,
       paddingHorizontal: 16,
     },
+    lable_style: {
+        color:"#fff", 
+        fontWeight: "bold", 
+        fontSize: 15
+    }
 });
