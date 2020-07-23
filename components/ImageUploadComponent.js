@@ -4,6 +4,7 @@ import { View,
     Image,
     TouchableOpacity,
     StyleSheet,
+    Alert
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -38,25 +39,39 @@ const ImageUpload = ( {navigation} ) => {
     }
     
     const handleUploadImage = () => {
-        setLoading(true)
-        let body = new FormData();
-        body.append('image', {uri: riceImage, name: riceType, filename :riceType, type: 'image/png'});
-            body.append('Content-Type', 'image/png');
+    	if(riceImage === ''){
+    		Alert.alert(
+		    'Error',
+		    'Please select Image'
+                );
+    	}
+    	else if(riceType === '' || riceType === "0"){
+    		Alert.alert(
+		    'Error',
+		    'Please select Rice Type'
+		);
+    	}
+    	else{
+		setLoading(true)
+		let body = new FormData();
+		body.append('image', {uri: riceImage, name: riceType, filename :riceType, type: 'image/png'});
+		    body.append('Content-Type', 'image/png');
 
-        fetch('http://'+global.ipAdress+'/upload',{ method: 'POST',headers:{  
-            "Content-Type": "multipart/form-data",
-            "otherHeader": "foo",
-        },
-         body : body} )
-        .then((res) => res.json())
-        .then((res) => {
-            setResultData({'grain_type': res['Grain_Type'], 'total_grains': res['Total'], 'total_damage': res['Damage'], 'total_correct': res['Correct'], 'grade': res['Result'], 'resultsAreset': true})
-         })
-        .catch((e) => {
-            setLoading(false)
-            alert(e)
-        })
-        .done()    
+		fetch('http://'+global.ipAdress+'/upload',{ method: 'POST',headers:{  
+		    "Content-Type": "multipart/form-data",
+		    "otherHeader": "foo",
+		},
+		 body : body} )
+		.then((res) => res.json())
+		.then((res) => {
+		    setResultData({'grain_type': res['Grain_Type'], 'total_grains': res['Total'], 'total_damage': res['Damage'], 'total_correct': res['Correct'], 'grade': res['Result'], 'resultsAreset': true})
+		 })
+		.catch((e) => {
+		    setLoading(false)
+		    alert(e)
+		})
+		.done() 
+    	}   
     }
 
     return (
