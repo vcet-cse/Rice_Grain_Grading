@@ -20,7 +20,7 @@ const Drawercontent = (props) => {
                     <View>
                         <ImageBackground
                             resizeMode={'cover'} 
-                            style={{width: 280, height: 150}}
+                            style={{width: 280, height: 180 }}
                             source={require('../assets/header_wallpaper.jpg')}
                         >
                         </ImageBackground>
@@ -89,7 +89,7 @@ export default Drawercontent;
 
 const styles = StyleSheet.create({
     drawerContent: {
-      flex: 1,
+      flex: 1
     },
     userInfoSection: {
       paddingLeft: 20,
@@ -118,8 +118,8 @@ const styles = StyleSheet.create({
       marginRight: 3,
     },
     drawerSection: {
-      marginTop: 15,
-      paddingTop: 50
+      marginTop: 5,
+      paddingTop: 15
     },
     bottomDrawerSection: {
         marginBottom: 15,
