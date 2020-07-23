@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, ImageBackground, BackHandler } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faHome, faSignOutAlt, faStar, faUserFriends, faUserCog } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faSignOutAlt, faStar, faUserFriends, faUserCog, faTools } from '@fortawesome/free-solid-svg-icons';
 import {
     Drawer
 } from 'react-native-paper';
@@ -64,6 +64,14 @@ const Drawercontent = (props) => {
             <Drawer.Section style={styles.drawerSection}>
             </Drawer.Section>
             <Drawer.Section style={styles.bottomDrawerSection}>
+                <DrawerItem 
+                    icon={() => (
+                        <FontAwesomeIcon icon={faTools} size={20} color={"white"} />
+                    )}
+                    label="Devoloper"
+                    labelStyle={styles.lable_style}
+                    onPress={() => {props.navigation.navigate('SetIpAdress')}}
+                />
                 <DrawerItem 
                     icon={() => (
                         <FontAwesomeIcon icon={faSignOutAlt} size={20} color={"white"} />

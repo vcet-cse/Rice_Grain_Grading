@@ -43,7 +43,7 @@ const ImageUpload = ( {navigation} ) => {
         body.append('image', {uri: riceImage, name: riceType, filename :riceType, type: 'image/png'});
             body.append('Content-Type', 'image/png');
 
-        fetch('http://192.168.225.44:3001/upload',{ method: 'POST',headers:{  
+        fetch('http://'+global.ipAdress+'/upload',{ method: 'POST',headers:{  
             "Content-Type": "multipart/form-data",
             "otherHeader": "foo",
         },
@@ -64,6 +64,7 @@ const ImageUpload = ( {navigation} ) => {
                 <Animatable.View 
                     animation="fadeInUpBig"
                 >
+                    { console.log("Ip adress is " + global.ipAdress) }
                     {
                         riceImage === '' ?
                         <View onTouchStart={() => _getPhotoLibrary()} style={styles.ImageSelect}>

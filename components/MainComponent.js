@@ -10,11 +10,13 @@ import AboutUs from './AboutUsComponent';
 import ImageUpload from './ImageUploadComponent';
 import Drawercontent from './DrawerContent';
 import ResultScreen from './ResultComponent';
+import SetIpAdress from './SetApiIpAdressComponent';
 
 const HomeStack = createStackNavigator();
 const HowToUseStack = createStackNavigator();
 const ImageUploadStack = createStackNavigator();
 const AboutusStack = createStackNavigator();
+const SetIpAdressStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const HomeStackScreen = ({ navigation }) => (
@@ -138,6 +140,37 @@ const ImageUploadStackScreen = ({ navigation }) => (
   </ImageUploadStack.Navigator>
 );
 
+
+const SetIpAdressStackStackScreen = ({ navigation }) => (
+  <SetIpAdressStack.Navigator 
+    screenOptions = {{
+      headerStyle: {
+        backgroundColor: '#00313f'
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold'
+      }
+    }}
+  >
+    <SetIpAdressStack.Screen
+        name="Set IP Adress"
+        component={SetIpAdress}
+        options = {{
+          headerLeft: () => (
+            <Icon 
+              reverse
+              name='menu' 
+              size={25} 
+              color='#00313f'
+              onPress= {() => {navigation.openDrawer()}}
+            />
+          )
+        }}
+    />
+  </SetIpAdressStack.Navigator>
+);
+
 const MainNavigator = () => {
   return (
     <NavigationContainer>
@@ -146,6 +179,7 @@ const MainNavigator = () => {
         <Drawer.Screen name="Howtouse" component={HowToUseStackScreen} />
         <Drawer.Screen name="Aboutus" component={AboutUsStackScreen} />
         <Drawer.Screen name="ImageUpload" component={ImageUploadStackScreen} />
+        <Drawer.Screen name="SetIpAdress" component={SetIpAdressStackStackScreen} />
       </Drawer.Navigator>
    </NavigationContainer>
   );

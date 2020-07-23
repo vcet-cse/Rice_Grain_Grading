@@ -18,7 +18,7 @@ const ResultScreen = (props) => {
                 animation="fadeInUpBig"
             >
                 <Image 
-                    source={{ uri: 'http://192.168.225.44:3001/get_images/image/Image_result/foo.png?' + Date.now() }} 
+                    source={{ uri: 'http://'+global.ipAdress+'/get_images/image/Image_result/foo.png?' + Date.now() }} 
                     style={{ aspectRatio: 1, resizeMode: 'contain', }} 
                     onTouchStart={() => _getPhotoLibrary()}
                 />  
